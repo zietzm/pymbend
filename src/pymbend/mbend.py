@@ -7,6 +7,7 @@ from numpy.typing import ArrayLike, NDArray
 class MbendMethod(Enum):
     JORJANI = "hj"
     SCHAEFFER = "lrs"
+    ZIETZ = "z"
 
 
 def mbend(
@@ -40,6 +41,9 @@ def mbend(
                 transformed = eigenvectors @ np.diag(eigenvalues) @ eigenvectors.T
                 eigenvalues = np.linalg.eigvalsh(transformed)
                 eigenvalues[eigenvalues < 0] = small_positive / 10
+            case MbendMethod.ZIETZ:
+                eigenvalues[eigenvalues < 0] = small_positive
+                eigenvalues[eigenvalues > 1] = 1 - small_positive
 
         transformed = eigenvectors @ np.diag(eigenvalues) @ eigenvectors.T
         diff = matrix - transformed
