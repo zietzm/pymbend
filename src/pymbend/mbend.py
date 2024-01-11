@@ -45,7 +45,7 @@ def mbend(
         diff = matrix - transformed
         if weights is not None:
             diff = diff * weights
-        matrix -= diff
+        matrix = matrix - diff
 
         eigenvalues, eigenvectors = np.linalg.eigh(matrix)
         i += 1
