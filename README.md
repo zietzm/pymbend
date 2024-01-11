@@ -1,13 +1,5 @@
 # pymbend
 
------
-
-**Table of Contents**
-
-- [Description)(#description)
-- [Installation](#installation)
-- [License](#license)
-
 ## Description
 
 [`mbend`](https://github.com/nilforooshan/mbend) is an "R package for bending non-positive-definite matrices to positive-definite".
@@ -19,11 +11,12 @@ Some naive timings are below:
 | --- | ---: | ---: |
 | `mbend` | 100 | 0.89 |
 | `mbend` | 200 | 13.8 |
-| `mbend` | 500 |  |
+| `mbend` | 500 | 1370.6 |
 | `pymbend` | 100 | 0.85 |
 | `pymbend` | 200 | 4.4 |
 | `pymbend` | 500 | 36.7 |
 
+These were made on a 2021 Intel MacBook Pro.
 
 ## Installation
 
