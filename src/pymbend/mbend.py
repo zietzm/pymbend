@@ -69,7 +69,7 @@ def check_matrix(matrix: NDArray) -> None:
         raise ValueError("matrix must be 2-dimensional")
     if matrix.shape[0] != matrix.shape[1]:
         raise ValueError("matrix must be square")
-    if not np.allclose(matrix, matrix.T):
+    if not np.allclose(matrix, matrix.T, atol=1e-5):
         raise ValueError("matrix must be symmetric")
 
 
