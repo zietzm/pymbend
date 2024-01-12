@@ -11,6 +11,7 @@ def bend_generalized_rayleigh(
     invert_weights: bool = False,
     max_iter: int = 10000,
     small_positive: float = 1e-4,
+    tol: float = 1e-5,
 ) -> NDArray:
     numerator = np.asarray(numerator)
     denominator = np.asarray(denominator)
@@ -27,6 +28,7 @@ def bend_generalized_rayleigh(
         max_iter=max_iter,
         small_positive=small_positive,
         method=MbendMethod.ZIETZ,
+        tol=tol,
     )
 
     bent_numerator = cholesky @ bent_transformed @ cholesky.T

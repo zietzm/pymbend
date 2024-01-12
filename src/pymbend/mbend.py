@@ -18,11 +18,12 @@ def mbend(
     max_iter: int = 10000,
     small_positive: float = 1e-4,
     method: MbendMethod = MbendMethod.JORJANI,
+    tol: float = 1e-5,
 ) -> NDArray:
     matrix = np.asarray(matrix)
-    check_matrix(matrix)
+    check_matrix(matrix, tol=tol)
 
-    weights = process_weights(weights, invert_weights)
+    weights = process_weights(weights, invert_weights, tol=tol)
 
     eigenvalues, eigenvectors = np.linalg.eigh(matrix)
     i = 0
@@ -64,21 +65,23 @@ def mbend(
     return matrix
 
 
-def check_matrix(matrix: NDArray) -> None:
+def check_matrix(matrix: NDArray, tol: float = 1e-5) -> None:
     if matrix.ndim != 2:
         raise ValueError("matrix must be 2-dimensional")
     if matrix.shape[0] != matrix.shape[1]:
         raise ValueError("matrix must be square")
-    if not np.allclose(matrix, matrix.T, atol=1e-5):
+    if not np.allclose(matrix, matrix.T, atol=tol):
         raise ValueError("matrix must be symmetric")
 
 
-def process_weights(weights: ArrayLike | None, invert_weights: bool) -> NDArray | None:
+def process_weights(
+    weights: ArrayLike | None, invert_weights: bool, tol: float
+) -> NDArray | None:
     if weights is None:
         return None
 
     weights = np.asarray(weights)
-    check_matrix(weights)
+    check_matrix(weights, tol=tol)
 
     if invert_weights:
         weights = invert_weight_matrix(weights)
