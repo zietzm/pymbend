@@ -2,3 +2,4 @@
 #
 # SPDX-License-Identifier: MIT
 from .mbend import MbendMethod, mbend
+from .rayleigh import bend_generalized_rayleigh
