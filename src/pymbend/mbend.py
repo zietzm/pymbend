@@ -1,3 +1,4 @@
+import warnings
 from enum import Enum
 
 import numpy as np
@@ -7,6 +8,7 @@ from numpy.typing import ArrayLike, NDArray
 class MbendMethod(Enum):
     JORJANI = "hj"
     SCHAEFFER = "lrs"
+    ZIETZ = "z"
 
 
 def mbend(
@@ -40,6 +42,9 @@ def mbend(
                 transformed = eigenvectors @ np.diag(eigenvalues) @ eigenvectors.T
                 eigenvalues = np.linalg.eigvalsh(transformed)
                 eigenvalues[eigenvalues < 0] = small_positive / 10
+            case MbendMethod.ZIETZ:
+                eigenvalues[eigenvalues < 0] = small_positive
+                eigenvalues[eigenvalues > 1] = 1 - small_positive
 
         transformed = eigenvectors @ np.diag(eigenvalues) @ eigenvectors.T
         diff = matrix - transformed
@@ -49,6 +54,12 @@ def mbend(
 
         eigenvalues, eigenvectors = np.linalg.eigh(matrix)
         i += 1
+
+    if i == max_iter:
+        warnings.warn(
+            "Maximum number of iterations reached. "
+            "The matrix may not be positive semidefinite."
+        )
 
     return matrix
 
