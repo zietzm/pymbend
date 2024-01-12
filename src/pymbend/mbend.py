@@ -1,3 +1,4 @@
+import warnings
 from enum import Enum
 
 import numpy as np
@@ -53,6 +54,12 @@ def mbend(
 
         eigenvalues, eigenvectors = np.linalg.eigh(matrix)
         i += 1
+
+    if i == max_iter:
+        warnings.warn(
+            "Maximum number of iterations reached. "
+            "The matrix may not be positive semidefinite."
+        )
 
     return matrix
 
