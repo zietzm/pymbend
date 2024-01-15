@@ -7,16 +7,18 @@ This is a simple port of `mbend` to Python, with the goal of improving computati
 
 Some naive timings are below:
 
-| Method | Matrix size | Time [s] |
+| Matrix size | `mbend` time [s] | `pymbend` time [s] |
 | --- | ---: | ---: |
-| `mbend` | 100 | 0.89 |
-| `mbend` | 200 | 13.8 |
-| `mbend` | 500 | 1370.6 |
-| `pymbend` | 100 | 0.85 |
-| `pymbend` | 200 | 4.4 |
-| `pymbend` | 500 | 36.7 |
+| 100 | 0.89 | 0.85|
+| 200 | 13.8 | 4.4 |
+| 500 | 1370.6 | 36.7 |
 
 These were made on a 2021 Intel MacBook Pro.
+
+
+In addition, it adds the ability to bend a matrix ($A$) to satisfy a generalized Rayleigh quotient inequality:
+$$0 \leq \frac{\beta^\intercal A \beta}{\beta^\intercal B \beta} \leq 1$$
+
 
 ## Installation
 
