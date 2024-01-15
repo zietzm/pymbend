@@ -7,7 +7,7 @@ from . import MbendMethod, mbend
 def bend_generalized_rayleigh(
     numerator: ArrayLike,
     denominator: ArrayLike,
-    numerator_weight: ArrayLike,
+    numerator_weight: ArrayLike | None = None,
     invert_weights: bool = False,
     max_iter: int = 10000,
     small_positive: float = 1e-4,
