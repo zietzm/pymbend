@@ -1,5 +1,5 @@
-import numpy as np
-from numpy.typing import ArrayLike, NDArray
+import numpy as np  # type: ignore
+from numpy.typing import ArrayLike, NDArray  # type: ignore
 
 from . import MbendMethod, mbend
 

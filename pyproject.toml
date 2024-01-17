@@ -1,83 +1,26 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "pymbend"
-dynamic = ["version"]
-description = ''
+version = "0.0.1"
+requires-python = ">=3.10"
 readme = "README.md"
-requires-python = ">=3.8"
-license = "MIT"
-keywords = []
 authors = [
-  { name = "zietzm", email = "michael.zietz@gmail.com" },
-]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
-]
-dependencies = [
-  "numpy~=1.25.2",
+    {name = "Michael Zietz", email = "michael.zietz@gmail.com"},
 ]
 
-[project.urls]
-Documentation = "https://github.com/unknown/pymbend#readme"
-Issues = "https://github.com/unknown/pymbend/issues"
-Source = "https://github.com/unknown/pymbend"
+dependencies = ["numpy~=1.25.2"]
 
-[tool.hatch.version]
-path = "src/pymbend/__about__.py"
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["pymbend"]
 
-[tool.hatch.envs.default]
-dependencies = [
-  "coverage[toml]>=6.5",
-  "pytest",
-]
-[tool.hatch.envs.default.scripts]
-test = "pytest {args:tests}"
-test-cov = "coverage run -m pytest {args:tests}"
-cov-report = [
-  "- coverage combine",
-  "coverage report",
-]
-cov = [
-  "test-cov",
-  "cov-report",
-]
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
-[[tool.hatch.envs.all.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+[project.optional-dependencies]
+test = ["pytest"]
 
-[tool.hatch.envs.types]
-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/pymbend tests}"
+[tool.pytest.ini_options]
+pythonpath = "src"
+addopts = ["--import-mode=importlib",]
 
-[tool.coverage.run]
-source_pkgs = ["pymbend", "tests"]
-branch = true
-parallel = true
-omit = [
-  "src/pymbend/__about__.py",
-]
-
-[tool.coverage.paths]
-pymbend = ["src/pymbend", "*/pymbend/src/pymbend"]
-tests = ["tests", "*/pymbend/tests"]
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
