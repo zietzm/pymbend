@@ -1,7 +1,4 @@
-# SPDX-FileCopyrightText: 2024-present zietzm <michael.zietz@gmail.com>
-#
-# SPDX-License-Identifier: MIT
-from .mbend import MbendMethod, mbend
-from .rayleigh import bend_generalized_rayleigh
+from pymbend.mbend import MbendMethod, mbend
+from pymbend.rayleigh import bend_generalized_rayleigh
 
 __all__ = ["bend_generalized_rayleigh", "mbend", "MbendMethod"]
