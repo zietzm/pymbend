@@ -1,7 +1,7 @@
 import numpy as np  # type: ignore
 from numpy.typing import ArrayLike, NDArray  # type: ignore
 
-from . import MbendMethod, mbend
+from pymbend.mbend import MbendMethod, mbend
 
 
 def bend_generalized_rayleigh(
